@@ -8,7 +8,11 @@ export const Container = styled.header`
   height: 70px;
   padding: 10px 20px;
   border-bottom: 1px solid #d3d3d3;
-  justify-content: space-between;
+  justify-content: center;
+`;
+
+export const Wrapper = styled.div`
+  width: 80%;
 `;
 
 export const Logo = styled.img`
