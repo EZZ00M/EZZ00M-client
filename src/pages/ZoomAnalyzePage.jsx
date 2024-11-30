@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../components/Header/Header";
 import * as S from "../pages/ZoomAnalyzePage.style";
 import DragBox from "../components/DragBox/DragBox";
+import Ad from "../components/Ad";
+import Explanation from "../components/Explanation/Explanation";
 
 const ZoomAnalyzePage = () => {
   return (
@@ -14,7 +16,9 @@ const ZoomAnalyzePage = () => {
           <br />
           누가 얼마나 있었는지 쉽게 알 수 있습니다.
         </S.SmallText>
+        <Ad />
         <DragBox />
+        <Explanation />
       </S.Container>
     </>
   );

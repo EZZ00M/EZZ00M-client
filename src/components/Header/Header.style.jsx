@@ -8,6 +8,7 @@ export const Container = styled.header`
   height: 70px;
   padding: 10px 20px;
   border-bottom: 1px solid #d3d3d3;
+  background-color: white;
   justify-content: center;
 `;
 
