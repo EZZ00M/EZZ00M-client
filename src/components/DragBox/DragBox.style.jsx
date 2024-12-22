@@ -70,9 +70,9 @@ export const Analyzer = styled.button`
   height: auto;
   padding: 10px 20px;
   border: none;
-  border-radius: 16px;
-  background-color: white;
-  color: black;
+  border-radius: 20px;
+  background-color: gray;
+  color: white;
   font-size: 20px;
   cursor: pointer;
 `;
