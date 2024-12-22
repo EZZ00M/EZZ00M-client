@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./DragBox.style";
+import axios from "axios";
+const address = process.env.REACT_APP_SERVER_URL;
 
 const DragBox = () => {
   const [file, setFile] = useState(null);
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
+  useEffect(() => {
+    if (file) {
+      const validExtensions = [".csv", ".xlsx", "xls"];
+      const fileExtensions = file.name.substring(file.name.lastIndexOf("."));
+
+      if (!validExtensions.includes(fileExtensions)) {
+        alert(
+          "지원하지 않는 파일 형식입니다. .csv, .xlsx, .xls 파일만 업로드 해주세요."
+        );
+        setFile(null);
+      }
+    }
+  }, [file]);
   const handleFileChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
@@ -21,20 +37,34 @@ const DragBox = () => {
     }
   };
 
-  const handleAnalyze = async () => {
+  const handleLogAnalyze = async () => {
+    if (!file) {
+      alert("파일을 선택해주세요.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("zoomLogFile", file);
+
     try {
-      const response = await axios.get(`/api/ezzoom`);
+      const response = await axios.post(`${address}/api/ezzoom`, formData);
 
-      const fileUrl = response.data.url;
-
-      if (fileUrl) {
-        window.open(fileUrl, "_blank");
+      if (response.status === 200) {
+        const downloadUrl = response.data;
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "analyzed_log.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        alert("다운로드가 완료되었습니다!");
+        setFile(null);
       } else {
-        throw new Error("파일 URL이 존재하지 않습니다.");
+        alert("파일 업로드에 실패했습니다.");
       }
     } catch (error) {
-      console.error("명단 분석 다운로드 중 오류 발생:", error);
-      alert("명단 분석에 오류가 생겼습니다. 다시 시도해 주세요.");
+      console.error("파일 업로드 중 오류 발생:", error);
+      alert("파일 업로드 중 오류가 발생했습니다. 다시 시도해 주세요.");
     }
   };
 
@@ -58,12 +88,15 @@ const DragBox = () => {
               <S.FlexBox>
                 <S.Icon />
                 <S.Text>분석할 파일을 드래그하거나 선택해주세요.</S.Text>
+                <S.Text>
+                  .csv, .xlsx, .xls 확장자 파일만 업로드할 수 있습니다.
+                </S.Text>
               </S.FlexBox>
             </S.InnerBox>
           ) : (
             <S.FlexBox>
               <S.FileName>{file.name}</S.FileName>
-              <S.Analyzer onClick={handleAnalyze}>로그 분석하기</S.Analyzer>
+              <S.Analyzer onClick={handleLogAnalyze}>로그 분석하기</S.Analyzer>
             </S.FlexBox>
           )}
         </S.Wrapper>
