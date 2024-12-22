@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./DragBox.style";
 import axios from "axios";
+const address = process.env.REACT_APP_SERVER_URL;
 
 const DragBox = () => {
   const [file, setFile] = useState(null);
@@ -46,10 +47,7 @@ const DragBox = () => {
     formData.append("zoomLogFile", file);
 
     try {
-      const response = await axios.post(
-        `http://15.164.41.128:8080/api/ezzoom`,
-        formData
-      );
+      const response = await axios.post(`${address}/api/ezzoom`, formData);
 
       if (response.status === 200) {
         const downloadUrl = response.data;
