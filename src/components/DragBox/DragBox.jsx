@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./DragBox.style";
 import axios from "axios";
-const address = process.env.REACT_APP_SERVER_URL;
+const address = import.meta.env.VITE_SERVER_URL;
 
 const DragBox = () => {
   const [file, setFile] = useState(null);
-  const [isDownloaded, setIsDownloaded] = useState(false);
 
   useEffect(() => {
     if (file) {
@@ -20,6 +19,7 @@ const DragBox = () => {
       }
     }
   }, [file]);
+
   const handleFileChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
@@ -59,11 +59,10 @@ const DragBox = () => {
         document.body.removeChild(link);
         alert("다운로드가 완료되었습니다!");
         setFile(null);
-      } else {
-        alert("파일 업로드에 실패했습니다.");
+      } else if (response.status === 401) {
+        alert("파일의 양식이 올바르지 않습니다.");
       }
     } catch (error) {
-      console.error("파일 업로드 중 오류 발생:", error);
       alert("파일 업로드 중 오류가 발생했습니다. 다시 시도해 주세요.");
     }
   };
