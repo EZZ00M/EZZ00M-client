@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./DragBox.style";
 import axios from "axios";
-const address = import.meta.env.REACT_APP_SERVER_URL;
+const address = import.meta.env.VITE_SERVER_URL;
 
 const DragBox = () => {
   const [file, setFile] = useState(null);
