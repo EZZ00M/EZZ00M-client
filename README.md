@@ -1,8 +1,15 @@
-# React + Vite
+## 프로젝트 소개
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Zoom 로그 파일을 업로드하면, 참석자의 총 참여 시간을 자동으로 분석하고 간편하게 확인할 수 있는 서비스입니다.
 
-Currently, two official plugins are available:
+## 사용 기술
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 코어: React
+- 스타일링: Styled-components
+- 패키지 매니저: npm
+- 빌드: Vite
+- 배포: Netlify
+
+## 개발 기간
+
+2024년 11월 17일 ~
