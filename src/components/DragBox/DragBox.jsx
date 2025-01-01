@@ -58,7 +58,7 @@ const DragBox = () => {
         link.click();
         document.body.removeChild(link);
         alert("다운로드가 완료되었습니다!");
-        setFile(null);
+        window.location.reload();
       } else if (response.status === 401) {
         alert("파일의 양식이 올바르지 않습니다.");
       }
