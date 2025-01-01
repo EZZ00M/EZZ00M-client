@@ -1,11 +1,11 @@
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
-
 [build]
-  publish = "build" # build 폴더 경로 (React 앱의 경우)
+  publish = "dist"
   command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   for = "/*.js"
