@@ -2,8 +2,8 @@ import React from "react";
 import Header from "../components/Header/Header";
 import * as S from "../pages/ZoomAnalyzePage.style";
 import DragBox from "../components/DragBox/DragBox";
-import Ad from "../components/Ad";
 import Explanation from "../components/Explanation/Explanation";
+import Footer from "../components/Footer/Footer";
 
 const ZoomAnalyzePage = () => {
   return (
@@ -19,6 +19,7 @@ const ZoomAnalyzePage = () => {
         <DragBox />
         <Explanation />
       </S.Container>
+      <Footer />
     </>
   );
 };
