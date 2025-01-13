@@ -89,7 +89,7 @@ const DragBox = () => {
       if (response?.status === 200) {
         if (files.length === 1) {
           const analyzedFile = response.data.analyzedFile;
-
+          
           setTotalPdfUrl(analyzedFile);
           setDetailPdfUrls([]);
         } else {
@@ -100,6 +100,7 @@ const DragBox = () => {
         }
         alert("분석이 완료되었습니다! 아래 버튼을 통해 PDF를 다운로드하세요.");
       } else if (response?.status === 401) {
+
         alert("파일의 양식이 올바르지 않습니다.");
       } else if (response?.status === 422) {
         alert("분석에 실패하였습니다.");
