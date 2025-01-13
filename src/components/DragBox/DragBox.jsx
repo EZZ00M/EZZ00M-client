@@ -88,15 +88,15 @@ const DragBox = () => {
       }
       if (response?.status === 200) {
         if (files.length === 1) {
-          setTotalPdfUrl(response.data);
+          const analyzedFile = response.data.analyzedFile;
+
+          setTotalPdfUrl(analyzedFile);
           setDetailPdfUrls([]);
         } else {
           const { totalAnalyzedFile, detailAnalyzedFileList } = response.data;
 
           setTotalPdfUrl(totalAnalyzedFile);
           setDetailPdfUrls(detailAnalyzedFileList);
-          console.log(totalPdfUrl);
-          console.log(detailAnalyzedFileList);
         }
         alert("분석이 완료되었습니다! 아래 버튼을 통해 PDF를 다운로드하세요.");
       } else if (response?.status === 401) {
