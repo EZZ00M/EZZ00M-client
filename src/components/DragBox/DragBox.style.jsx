@@ -1,20 +1,41 @@
 import styled from "styled-components";
-import { FaFile, FaFileArrowUp } from "react-icons/fa6";
+import { FaXmark, FaFileArrowUp } from "react-icons/fa6";
 
-export const Container = styled.label`
+export const FileDropContainer = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
-  height: 400px;
+  height: 100%;
   background-color: lightgray;
   border-radius: 16px;
-  margin: 30px 0;
+  margin: 10px 0;
   padding: 20px;
   cursor: pointer;
+
+  &:hover {
+    background-color: #d3d3d3;
+  }
 `;
 
-export const Input = styled.input`
+export const FileListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 16px;
+  margin: 10px 0;
+  padding: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d3d3d3;
+  }
+`;
+
+export const HiddenInput = styled.input`
   display: none;
 `;
 
@@ -32,7 +53,7 @@ export const InnerBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 250px;
+  height: 100%;
   justify-content: center;
   align-content: center;
 `;
@@ -64,7 +85,6 @@ export const FileName = styled.p`
 `;
 
 export const Button = styled.button`
-  display: flex;
   padding: 12px 20px;
   background-color: #007bff;
   color: white;
@@ -72,7 +92,6 @@ export const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  align-self: flex-end;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
@@ -84,45 +103,57 @@ export const DownloadButtonsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 20px;
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 8px;
 `;
 
+export const StyledFilesContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 12px;
+`;
+
 export const StyledFlexBox = styled.div`
   display: grid;
   gap: 20px;
-  padding: 30px;
+  padding: 10px;
   border-radius: 16px;
   max-height: 400px;
 `;
 
-export const FileIcon = styled(FaFile)`
-  margin-right: 8px;
-  color: #fff;
-`;
-
 export const StyledFileName = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 12px 16px;
+  padding: 10px 16px;
+  background-color: #ffffff;
   border-radius: 8px;
-  font-size: 20px;
-  color: white;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: 500;
+  color: #343a40;
 `;
 
-export const StyledFilesContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  max-height: 250px;
-  overflow-y: auto;
-  padding-right: 4px;
+export const FileIcon = styled(FaXmark)`
+  color: #e03131;
+  cursor: pointer;
+  font-size: 18px;
+
+  &:hover {
+    color: #c92a2a;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 `;
