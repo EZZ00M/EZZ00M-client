@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import * as S from "./DragBox.style";
 import axios from "axios";
 import Modal from "../Modal/Modal";
@@ -15,7 +15,9 @@ const DragBox = () => {
   const [detailPdfUrls, setDetailPdfUrls] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const filterValidFiles = (fileList) => {
+  const fileInputRef = useRef(null);
+
+  const validateFiles = (fileList) => {
     const validFiles = fileList.filter((file) =>
       validExtensions.includes(file.name.substring(file.name.lastIndexOf(".")))
     );
@@ -27,42 +29,42 @@ const DragBox = () => {
     return validFiles;
   };
 
-  const handleFileChange = (event) => {
-    if (event.target.files) {
-      const selectedFiles = Array.from(event.target.files);
-      const validFiles = filterValidFiles(selectedFiles);
-      setFiles((prevFiles) => [...prevFiles, ...validFiles]);
-      setTotalPdfUrl(null);
-      setDetailPdfUrls([]);
-    }
+  const handleFileUpload = (newFiles) => {
+    const validFiles = validateFiles(newFiles);
+    setFiles((prevFiles) => [...prevFiles, ...validFiles]);
+    resetAnalysisResults();
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
+  const handleFileChange = (event) => {
+    if (event.target.files) {
+      handleFileUpload(Array.from(event.target.files));
+    }
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
-    if (event.dataTransfer.files) {
-      const droppedFiles = Array.from(event.dataTransfer.files);
-      const validFiles = filterValidFiles(droppedFiles);
-      setFiles((prevFiles) => [...prevFiles, ...validFiles]);
-      setTotalPdfUrl(null);
-      setDetailPdfUrls([]);
+    handleFileUpload(Array.from(event.dataTransfer.files));
+  };
+
+  const resetAnalysisResults = () => {
+    setTotalPdfUrl(null);
+    setDetailPdfUrls([]);
+  };
+
+  const handleRemoveFile = (fileName) => {
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
+
+  const handleLogAnalyze = () => {
+    if (files.length === 0) {
+      alert("파일을 선택해주세요.");
+      return;
     }
+    setModalOpen(true);
   };
 
-  const downloadFile = (url, filename) => {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleLogAnalyze = async (time, count) => {
-    if (!files || files.length === 0) {
+  const handleLogAnalyzeSubmit = async (time, count) => {
+    if (files.length === 0) {
       alert("파일을 선택해주세요.");
       return;
     }
@@ -115,43 +117,56 @@ const DragBox = () => {
 
   return (
     <>
-      <S.Container
-        htmlFor='HiddenInput'
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        <S.Input
-          id='HiddenInput'
-          type='file'
-          accept='.csv,.xlsx,.xls'
-          multiple
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
-        <S.Wrapper className='wrapper'>
-          {files.length === 0 ? (
-            <EmptyState />
+      {files.length === 0 ? (
+        <S.FileDropContainer
+          htmlFor='fileInput'
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+        >
+          <EmptyState />
+        </S.FileDropContainer>
+      ) : (
+        <S.FileListContainer
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+        >
+          {!totalPdfUrl ? (
+            <FileSelectedState
+              files={files}
+              onAnalyze={handleLogAnalyze}
+              onRemove={handleRemoveFile}
+              onAddFiles={() => fileInputRef.current?.click()}
+            />
           ) : (
-            !totalPdfUrl && (
-              <FileSelectedState
-                files={files}
-                onAnalyze={() => setModalOpen(true)}
-              />
-            )
-          )}
-          {totalPdfUrl && (
             <AnalysisCompleteState
               totalPdfUrl={totalPdfUrl}
               detailPdfUrls={detailPdfUrls}
-              downloadFile={downloadFile}
+              downloadFile={(url) => {
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "result.pdf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
             />
           )}
-        </S.Wrapper>
-      </S.Container>
+        </S.FileListContainer>
+      )}
+
+      <S.HiddenInput
+        id='fileInput'
+        ref={fileInputRef}
+        type='file'
+        accept='.csv,.xlsx,.xls'
+        multiple
+        onChange={handleFileChange}
+      />
+
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSubmit={(time, count) => handleLogAnalyze(time, count)}
+        onSubmit={handleLogAnalyzeSubmit}
         fileCount={files.length}
       />
     </>
