@@ -9,6 +9,7 @@ const Header = () => {
         <S.Logo
           src={Logo}
           alt='logo'
+          onClick={() => window.location.reload()}
         />
       </S.Wrapper>
     </S.Container>
