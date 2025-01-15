@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, onSubmit, fileCount }) => {
         )}
         <S.FormRow>
           <S.StyledLabel>
-            최소 이수 시간을 입력해주세요:
+            최소 이수 시간(분)을 입력해주세요:
             <S.StyledInput
               type='text'
               placeholder='예) 30'
