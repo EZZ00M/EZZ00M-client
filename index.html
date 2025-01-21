@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google tag (gtag.js) -->
+
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XX9G1VKVNN"
+      src="https://www.googletagmanager.com/gtag/js?id=G-6GD0LTBX0W"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -18,10 +17,19 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-XX9G1VKVNN");
+      gtag("config", "G-6GD0LTBX0W");
     </script>
+
+    <!-- Google Analytics 로드 확인 -->
+    <script>
+      if (typeof gtag === "undefined") {
+        console.warn("Google Analytics script not loaded");
+      }
+    </script>
+
     <title>EZZooM</title>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
