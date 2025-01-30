@@ -46,7 +46,7 @@ export const Wrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  border: 2px dashed white;
+  border: 2px dashed #ffffff;
   border-radius: 16px;
 `;
 

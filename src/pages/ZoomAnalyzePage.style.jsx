@@ -13,6 +13,12 @@ export const Container = styled.div`
   height: calc(100vh - 70px);
   height: 100vh;
   padding-top: 100px;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    padding-top: 80px;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+  }
 `;
 
 export const Title = styled.h1`
