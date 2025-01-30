@@ -1,4 +1,3 @@
-import React from "react";
 import ExplanationList from "./ExplanationList";
 import * as S from "./Explanation.style";
 

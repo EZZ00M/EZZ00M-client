@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as S from "./DragBox.style";
 import axios from "axios";
 import Modal from "../Modal/Modal";
@@ -91,7 +91,7 @@ const DragBox = () => {
       if (response?.status === 200) {
         if (files.length === 1) {
           const analyzedFile = response.data.analyzedFile;
-          
+
           setTotalPdfUrl(analyzedFile);
           setDetailPdfUrls([]);
         } else {
@@ -102,7 +102,6 @@ const DragBox = () => {
         }
         alert("분석이 완료되었습니다! 아래 버튼을 통해 PDF를 다운로드하세요.");
       } else if (response?.status === 401) {
-
         alert("파일의 양식이 올바르지 않습니다.");
       } else if (response?.status === 422) {
         alert("분석에 실패하였습니다.");
@@ -120,7 +119,7 @@ const DragBox = () => {
     <>
       {files.length === 0 ? (
         <S.FileDropContainer
-          htmlFor='fileInput'
+          htmlFor="fileInput"
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
         >
@@ -156,10 +155,10 @@ const DragBox = () => {
       )}
 
       <S.HiddenInput
-        id='fileInput'
+        id="fileInput"
         ref={fileInputRef}
-        type='file'
-        accept='.csv,.xlsx,.xls'
+        type="file"
+        accept=".csv,.xlsx,.xls"
         multiple
         onChange={handleFileChange}
       />
