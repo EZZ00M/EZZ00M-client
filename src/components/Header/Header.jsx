@@ -1,4 +1,3 @@
-import React from "react";
 import * as S from "./Header.style";
 import Logo from "../../assets/logo.png";
 
@@ -8,7 +7,7 @@ const Header = () => {
       <S.Wrapper>
         <S.Logo
           src={Logo}
-          alt='logo'
+          alt="logo"
           onClick={() => window.location.reload()}
         />
       </S.Wrapper>
