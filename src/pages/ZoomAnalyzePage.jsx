@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header/Header";
 import * as S from "../pages/ZoomAnalyzePage.style";
 import DragBox from "../components/DragBox/DragBox";

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAKPOINTS } from "../../styles/mediaQueries";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -10,6 +11,12 @@ export const Wrapper = styled.div`
   border-radius: 8px;
   justify-content: space-between;
   align-items: stretch;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    flex-direction: column;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+  }
 `;
 
 export const Container = styled.div`
@@ -32,6 +39,13 @@ export const Title = styled.p`
   font-weight: 700;
   font-size: 22px;
   margin: 5px 0;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    font-size: 20px;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+    font-size: 18px;
+  }
 `;
 
 export const Content = styled.p`
@@ -41,4 +55,12 @@ export const Content = styled.p`
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    font-size: 14px;
+    line-height: 160%;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+    line-height: 140%;
+  }
 `;
