@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaXmark, FaFileArrowUp } from "react-icons/fa6";
+import { BREAKPOINTS } from "../../styles/mediaQueries";
 
 export const FileDropContainer = styled.label`
   display: flex;
@@ -62,7 +63,7 @@ export const Icon = styled(FaFileArrowUp)`
   display: flex;
   width: 100px;
   height: 100px;
-  color: white;
+  color: #ffffff;
 `;
 
 export const FlexBox = styled.div`
@@ -70,25 +71,53 @@ export const FlexBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 28px;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    gap: 20px;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+    gap: 16px;
+  }
+`;
+
+export const Subscription = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    gap: 8px;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+    gap: 6px;
+  }
 `;
 
 export const Text = styled.p`
   font-size: 26px;
   font-weight: 800;
-  color: white;
+  color: #ffffff;
+
+  @media (max-width: ${BREAKPOINTS[1]}px) {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  @media (max-width: ${BREAKPOINTS[0]}px) {
+    font-size: 20px;
+  }
 `;
 
 export const FileName = styled.p`
-  color: white;
+  color: #ffffff;
   font-size: 22px;
 `;
 
 export const Button = styled.button`
   padding: 12px 20px;
   background-color: #007bff;
-  color: white;
-  font-size: 1rem;
+  color: #ffffff;
+  font-size: 14px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
